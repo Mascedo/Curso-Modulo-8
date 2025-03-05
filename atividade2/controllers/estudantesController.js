@@ -43,21 +43,20 @@ exports.deletarEstudantes = (req, res) => {
     let verificardor = estudantes.find(estudante => estudante.id === id)
     if(verificardor){
         estudantes = estudantes.filter(estudante => estudante.id !== id)
-        res.status(202).json('Livro removido!')
+        res.status(202).json('Estudante removido!')
     }else{
         res.status(400).json('ID de remoção não encontrado!')
     }
 }
 
 exports.buscarEstudantes = (req, res) => {
-    const {nome, matricula, curso, ano} = req.query;
+    const {nome, matricula, curso} = req.query;
     let resultado = estudantes;
 
-    if(nome||matricula||curso||ano){
+    if(nome||matricula||curso){
     if (nome) resultado = resultado.filter(estudante => estudante.nome.toLowerCase().includes(nome.toLowerCase()));
     if (matricula) resultado = resultado.filter(estudante => estudante.matricula.toLowerCase().includes(matricula.toLowerCase()));
     if (curso) resultado = resultado.filter(estudante => estudante.curso.toLowerCase().includes(curso.toLowerCase()));
-    if (ano) resultado = resultado.filter(estudante => estudante.ano == ano);
     }else{
         res.status(400).json('Metodo de busca incorreto!')
     }
